@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 中文版 - 一键安装包</title>
+    <meta name="keywords" content="OpenClaw,OpenClaw本地部署,私人AI助手,AI智能体,一键安装">
+    <meta name="description" content="OpenClaw 本地部署｜2026 端侧 AI 首选，一键安装包让部署变得简单">
+    <link rel="shortcut icon" href="https://open.shuwei-1.top/open_claw/image/pixel-lobster.svg" type="image/x-icon">
+    <style>
+        :root {
+            --vp-c-brand: #2563eb;
+            --vp-c-brand-light: #3b82f6;
+            --vp-c-brand-dark: #1d4ed8;
+            --vp-home-hero-name-color: transparent;
+            --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            --vp-c-bg: #ffffff;
+            --vp-c-bg-alt: #f8fafc;
+            --vp-c-text-1: #1e293b;
+            --vp-c-text-2: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--vp-c-bg);
+            color: var(--vp-c-text-1);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .VPNavBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .VPNavBar .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .VPNavBar .title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--vp-c-text-1);
+            text-decoration: none;
+        }
+
+        .VPNavBar .title img {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* Hero Section */
+        .VPHero {
+            padding: 160px 24px 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .VPHero .main {
+            text-align: left;
+        }
+
+        .VPHero .name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            background: var(--vp-home-hero-name-background);
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .VPHero .text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--vp-c-text-1);
+        }
+
+        .VPHero .tagline {
+            font-size: 1.25rem;
+            color: var(--vp-c-text-2);
+            margin: 24px 0;
+            max-width: 540px;
+        }
+
+        .VPButton {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.25s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .VPButton.brand {
+            background: linear-gradient(135deg, var(--vp-c-brand) 0%, var(--vp-c-brand-dark) 100%);
+            color: white;
+        }
+
+        .VPButton.brand:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+        }
+
+        .VPHero .image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+        }
+
+        /* Features Section */
+        .VPFeatures {
+            padding: 80px 24px;
+            background: var(--vp-c-bg-alt);
+        }
+
+        .VPFeatures .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .VPFeatures .items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .VPFeature .box {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .VPFeature .box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--vp-c-brand-light);
+        }
+
+        .VPFeature .icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .VPFeature .title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--vp-c-text-1);
+        }
+
+        .VPFeature .details {
+            color: var(--vp-c-text-2);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Channel Section */
+        .VPChannel {
+            padding: 80px 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .VPChannel h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .channel-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+
+        .channel-card:hover {
+            border-color: var(--vp-c-brand);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .channel-card.coming-soon {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .channel-card img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .channel-info {
+            flex: 1;
+        }
+
+        .channel-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .channel-status {
+            font-size: 0.8rem;
+            color: #10b981;
+        }
+
+        .channel-status.upcoming {
+            color: #f59e0b;
+        }
+
+        /* Install Section - 新增 */
+        .VPInstall {
+            padding: 80px 24px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+
+        .VPInstall .container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .VPInstall h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .VPInstall .subtitle {
+            color: var(--vp-c-text-2);
+            margin-bottom: 32px;
+            font-size: 1.1rem;
+        }
+
+        .install-steps {
+            text-align: left;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .step-item:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--vp-c-brand) 0%, var(--vp-c-brand-dark) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .step-content p {
+            color: var(--vp-c-text-2);
+            font-size: 0.95rem;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .req-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .req-item span:first-child {
+            color: #10b981;
+        }
+
+        /* FAQ Section */
+        .VPFAQ {
+            padding: 80px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .VPFAQ h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 24px;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .faq-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--vp-c-text-1);
+        }
+
+        .faq-item p {
+            color: var(--vp-c-text-2);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .VPFooter {
+            padding: 40px 24px;
+            text-align: center;
+            color: var(--vp-c-text-2);
+            border-top: 1px solid #e2e8f0;
+            background: var(--vp-c-bg-alt);
+        }
+
+        .VPFooter a {
+            color: var(--vp-c-brand);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .VPHero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 120px 24px 60px;
+            }
+
+            .VPHero .main {
+                text-align: center;
+            }
+
+            .VPHero .tagline {
+                margin: 24px auto;
+            }
+
+            .VPHero .image {
+                order: -1;
+            }
+
+            .VPFeatures .items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .channels-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .VPHero .name, .VPHero .text {
+                font-size: 2.5rem;
+            }
+
+            .VPFeatures .items {
+                grid-template-columns: 1fr;
+            }
+
+            .channels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .install-steps {
+                padding: 24px;
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .VPHero .image img {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="VPNavBar">
+        <div class="container">
+            <a href="#" class="title">
+                <img src="https://open.shuwei-1.top/open_claw/image/pixel-lobster.svg" alt="Logo">
+                <span>OpenClaw 中文版</span>
+            </a>
+            <div>
+                <a href="OpenClaw-Setup-1.0.94.exe" class="VPButton brand" style="padding: 8px 20px; font-size: 0.9rem;">立即安装</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="VPHero">
+        <div class="main">
+            <h1>
+                <span class="name">OpenClaw中文版</span>
+                <span class="text">真正能做事的 AI</span>
+            </h1>
+            <p class="tagline">
+                帮你清理收件箱、发送邮件、管理日历、办理登机手续。通过飞书、WhatsApp、Telegram、Discord、Slack 或任何你常用的聊天应用。
+            </p>
+            <a href="OpenClaw-Setup-1.0.94.exe" class="VPButton brand">一键安装</a>
+        </div>
+        <div class="image">
+            <img src="https://open.shuwei-1.top/open_claw/image/head.png" alt="OpenClaw">
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="VPFeatures">
+        <div class="container">
+            <div class="items">
+                <div class="VPFeature">
+                    <article class="box">
+                        <div class="icon">🖥️</div>
+                        <h2 class="title">运行在你的设备上</h2>
+                        <p class="details">Mac、Windows或Linux。Anthropic、OpenAI或本地模型。默认私有——你的数据属于你自己。</p>
+                    </article>
+                </div>
+                <div class="VPFeature">
+                    <article class="box">
+                        <div class="icon">💬</div>
+                        <h2 class="title">任意聊天应用</h2>
+                        <p class="details">通过飞书、WhatsApp、Telegram、Discord、Slack或iMessage与它对话。支持私聊和群聊。</p>
+                    </article>
+                </div>
+                <div class="VPFeature">
+                    <article class="box">
+                        <div class="icon">🧠</div>
+                        <h2 class="title">持久记忆</h2>
+                        <p class="details">记住你的一切并成为独一无二的你的AI。你的偏好、你的上下文、你的AI。</p>
+                    </article>
+                </div>
+                <div class="VPFeature">
+                    <article class="box">
+                        <div class="icon">🌐</div>
+                        <h2 class="title">浏览器控制</h2>
+                        <p class="details">它可以浏览网页、填写表单、从任何网站提取数据。</p>
+                    </article>
+                </div>
+                <div class="VPFeature">
+                    <article class="box">
+                        <div class="icon">🔧</div>
+                        <h2 class="title">完整系统访问</h2>
+                        <p class="details">读写文件、运行Shell命令、执行脚本。完全访问或沙箱模式——由你选择。</p>
+                    </article>
+                </div>
+                <div class="VPFeature">
+                    <article class="box">
+                        <div class="icon">⚡</div>
+                        <h2 class="title">技能与插件</h2>
+                        <p class="details">通过编写技能或安装插件来扩展它的能力。任何语言都可以。</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Channel Section -->
+    <div class="VPChannel">
+        <h2>💬 支持的消息渠道</h2>
+        <div class="channels-grid">
+            <a href="OpenClaw-Setup-1.0.94.exe" class="channel-card download-count">
+                <img src="https://open.shuwei-1.top/open_claw/image/feishu.png" alt="飞书">
+                <div class="channel-info">
+                    <div class="channel-name">飞书</div>
+                    <div class="channel-status">✅ 已支持</div>
+                </div>
+            </a>
+            <a href="OpenClaw-Setup-1.0.94.exe" class="channel-card download-count">
+                <img src="https://open.shuwei-1.top/open_claw/image/whatsapp.png" alt="WhatsApp">
+                <div class="channel-info">
+                    <div class="channel-name">WhatsApp</div>
+                    <div class="channel-status">✅ 已支持</div>
+                </div>
+            </a>
+            <a href="OpenClaw-Setup-1.0.94.exe" class="channel-card download-count">
+                <img src="https://open.shuwei-1.top/open_claw/image/telegram.png" alt="Telegram">
+                <div class="channel-info">
+                    <div class="channel-name">Telegram</div>
+                    <div class="channel-status">✅ 已支持</div>
+                </div>
+            </a>
+            <a href="OpenClaw-Setup-1.0.94.exe" class="channel-card download-count">
+                <img src="https://open.shuwei-1.top/open_claw/image/discord.png" alt="Discord">
+                <div class="channel-info">
+                    <div class="channel-name">Discord</div>
+                    <div class="channel-status">✅ 已支持</div>
+                </div>
+            </a>
+            <a href="OpenClaw-Setup-1.0.94.exe" class="channel-card download-count">
+                <img src="https://open.shuwei-1.top/open_claw/image/slack.png" alt="Slack">
+                <div class="channel-info">
+                    <div class="channel-name">Slack</div>
+                    <div class="channel-status">✅ 已支持</div>
+                </div>
+            </a>
+            <a href="OpenClaw-Setup-1.0.94.exe" class="channel-card download-count">
+                <img src="https://open.shuwei-1.top/open_claw/image/signal.png" alt="Signal">
+                <div class="channel-info">
+                    <div class="channel-name">Signal</div>
+                    <div class="channel-status">✅ 已支持</div>
+                </div>
+            </a>
+            <a href="OpenClaw-Setup-1.0.94.exe" class="channel-card download-count">
+                <img src="https://open.shuwei-1.top/open_claw/image/imessage.png" alt="iMessage">
+                <div class="channel-info">
+                    <div class="channel-name">iMessage</div>
+                    <div class="channel-status">✅ 已支持</div>
+                </div>
+            </a>
+            <a href="OpenClaw-Setup-1.0.94.exe" class="channel-card download-count">
+                <img src="https://open.shuwei-1.top/open_claw/image/mattermost.png" alt="Mattermost">
+                <div class="channel-info">
+                    <div class="channel-name">Mattermost</div>
+                    <div class="channel-status">✅ 已支持</div>
+                </div>
+            </a>
+            <div class="channel-card coming-soon">
+                <img src="https://open.shuwei-1.top/open_claw/image/dingtalk.png" alt="钉钉">
+                <div class="channel-info">
+                    <div class="channel-name">钉钉</div>
+                    <div class="channel-status upcoming">🚧 即将上线</div>
+                </div>
+            </div>
+            <div class="channel-card coming-soon">
+                <img src="https://open.shuwei-1.top/open_claw/image/wecom.png" alt="企业微信">
+                <div class="channel-info">
+                    <div class="channel-name">企业微信</div>
+                    <div class="channel-status upcoming">🚧 即将上线</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Install Section -->
+    <div class="VPInstall" id="install">
+        <div class="container">
+            <h2>🚀 一键安装</h2>
+            <p class="subtitle">专为Windows用户打造，无需任何技术背景，轻松部署你的AI助手</p>
+
+            <div class="install-steps">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>下载安装包</h3>
+                        <p>点击本页面按钮下载 <strong>OpenClaw-Setup.exe</strong> 安装包（约5MB）</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>运行安装程序</h3>
+                        <p>右键选择"以管理员身份运行"，或双击直接运行</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>等待自动安装</h3>
+                        <p>程序会自动完成 WSL、Ubuntu、Node.js 等所有环境的安装（约10-30分钟）</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>开始使用</h3>
+                        <p>安装完成后，点击桌面快捷方式即可启动 OpenClaw</p>
+                    </div>
+                </div>
+
+                <div class="requirements-grid">
+                    <div class="req-item">
+                        <span>✓</span>
+                        <span>Windows 10/11</span>
+                    </div>
+                    <div class="req-item">
+                        <span>✓</span>
+                        <span>管理员权限</span>
+                    </div>
+                    <div class="req-item">
+                        <span>✓</span>
+                        <span>至少 10GB 可用空间</span>
+                    </div>
+                    <div class="req-item">
+                        <span>✓</span>
+                        <span>稳定的网络连接</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="VPFAQ">
+        <h2>❓ 常见问题</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h3>Q: 安装过程需要多久？</h3>
+                <p>取决于你的网络速度和网络环境，通常需要 10-30 分钟。首次安装 WSL 可能需要重启电脑。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 安装失败怎么办？</h3>
+                <p>可以尝试使用"强制重装.bat"或"清除代理并安装.bat"脚本。也可以联系客服获取远程安装支持。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 如何配置AI模型？</h3>
+                <p>安装完成后，运行配置向导，可以选择使用 Anthropic、OpenAI 或本地模型，并填写相应的 API Key。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 需要卸载怎么办？</h3>
+                <p>可以在开始菜单中找到卸载选项，或运行安装目录下创建的卸载程序。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="VPFooter">
+        <p>OpenClaw 中文版 | 让AI助手人人可用</p>
+        <p style="margin-top: 8px;">
+            <a href="https://github.com/sacdxj/openclaw" target="_blank">GitHub</a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
